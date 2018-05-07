@@ -4,13 +4,17 @@ const devMode = process.env.npm_lifecycle_event !== 'build'
 
 module.exports = {
     entry: {
-      main: './src/index.jsx'
+      main: './src/index'
     },
     resolve: {
-      extensions: ['.js', '.jsx', '.css', '.scss']
+      extensions: ['.js', '.jsx', '.css', '.scss', '.ts', '.tsx']
     },
     module: {
       rules: [
+        {
+          test: /\.tsx?$/,
+          use: 'ts-loader'
+        },
         {
           test: /\.jsx?$/,
           exclude: /node_modules/,
