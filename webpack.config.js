@@ -6,6 +6,9 @@ module.exports = {
     entry: {
       main: './src/index.jsx'
     },
+    resolve: {
+      extensions: ['.js', '.jsx', '.css', '.scss']
+    },
     module: {
       rules: [
         {
