@@ -7,7 +7,7 @@ module.exports = {
       main: './src/index'
     },
     resolve: {
-      extensions: ['.js', '.jsx', '.css', '.scss', '.ts', '.tsx']
+      extensions: ['.js', '.jsx', '.css', '.scss', '.ts', '.tsx', '.json']
     },
     module: {
       rules: [
@@ -17,7 +17,7 @@ module.exports = {
         },
         {
           test: /\.jsx?$/,
-          exclude: /node_modules/,
+          exclude: [/node_modules/, /extracted/],
           use: {
             loader: "babel-loader"
           }

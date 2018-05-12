@@ -1,35 +1,58 @@
 import * as React from 'react'
-import * as ReactDOM from 'react-dom'
+import { render } from 'react-dom'
 
-import * as _ from 'lodash'
-import { TweenMax, Power1, TimelineMax } from 'gsap'
+import Component from './components/Example'
+import { FormattedMessage  } from 'react-intl'
 
-import styles from './main.scss'
+import { IntlProvider, addLocaleData } from 'react-intl'
+import en from 'react-intl/locale-data/en'
+import de from 'react-intl/locale-data/de'
 
-export default class Component extends React.Component {
+// Our translated strings
+import localeData from '../dist/locales/data.json';
 
-    componentDidMount () {
-        TweenMax.staggerTo(document.getElementsByClassName('letter'), 1.2, { ease: Power1.easeInOut, top: 70, z: -200, repeat: -1, yoyo: true }, 0.28,)
-    }
+addLocaleData([...en, ...de])
 
-    renderText (txt) {
-        return _.map(txt, letter => {
-            return (
-                <span className="letter" style={{ position: 'relative' }}>
-                    {letter}
-                </span>
-            )
-        })
-    }
+// Define user's language. Different browsers have the user locale defined
+// on different fields on the `navigator` object, so we make sure to account
+// for these different by checking all of them
+const language = (navigator.languages && navigator.languages[0]) ||
+                     navigator.language ||
+                     navigator.userLanguage;
 
-    render () {
-        return (
-            <div style={{ perspective: 5000 }} id={styles.boilerplate}>
-                {this.renderText('Boilerplate')}
-            </div>
-        )
-    }
-}
+// Split locales with a region code
+const languageWithoutRegionCode = language.toLowerCase().split(/[_-]+/)[0];
+
+// Try full locale, try locale without region code, fallback to 'en'
+const messages = localeData[languageWithoutRegionCode] || localeData[language] || localeData.en;
 
 
-ReactDOM.render(<Component />, document.getElementById('app'))
+import './main.scss'
+
+// If browser doesn't support Intl (i.e. Safari), then we manually import
+// the intl polyfill and locale data.
+if (!window.intl) {
+    require.ensure([
+      'intl',
+      'intl/locale-data/jsonp/en.js',
+      'intl/locale-data/jsonp/de.js',
+    ], (require) => {
+      require('intl');
+      require('intl/locale-data/jsonp/en.js');
+      require('intl/locale-data/jsonp/de.js');
+      render(
+        <IntlProvider locale={language} messages={messages}>
+            <Component />
+        </IntlProvider>
+        , document.getElementById('app')
+    )
+    });
+  } else {
+    render(
+        <IntlProvider locale={language} messages={messages}>
+            <Component />
+        </IntlProvider>
+        , document.getElementById('app')
+    )
+  }
+

@@ -1,0 +1,7 @@
+.animBox {
+    position: absolute;
+    top: calc(50% + 50px);
+    width: 35%;
+    left: 50%;
+    transform: translate3d(-50%, 0, 0)
+}
