@@ -2,7 +2,6 @@ import * as React from 'react'
 import { render } from 'react-dom'
 
 import Component from './components/Example'
-import { FormattedMessage  } from 'react-intl'
 
 import { IntlProvider, addLocaleData } from 'react-intl'
 import en from 'react-intl/locale-data/en'
