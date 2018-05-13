@@ -1,0 +1,22 @@
+.drawPane {
+    position: absolute;
+    // border: 1px solid black;
+    box-sizing: border-box;
+    top: 40px;
+    left: 40px;
+    right: 40px;
+    bottom: 40px;
+    background: rgba(57, 143, 214, 0.534);
+}
+
+.drawPaneArea {
+    box-sizing: border-box;
+    margin: auto;
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 40px;
+    background: rgba(244, 29, 252, 0.5)
+}

@@ -1,0 +1,66 @@
+$nodeSize: 20px;
+
+.resizingNode {
+    pointer-events: painted;
+    position: absolute;
+    width: $nodeSize;
+    height: $nodeSize;
+    background: red;
+
+    &.n {
+        cursor: n-resize;
+        top: - #{$nodeSize / 2};
+        left: 50%;
+        transform: translate3d(-50%, 0, 0)
+    }
+    
+    &.e {
+        cursor: e-resize;
+        right: - #{$nodeSize / 2};
+        top: 50%;
+        transform: translate3d(0, -50%, 0)
+    }
+    
+    &.s {
+        cursor: s-resize;
+        bottom: - #{$nodeSize / 2};
+        left: 50%;
+        transform: translate3d(-50%, 0, 0)
+    }
+    
+    &.w {
+        cursor: w-resize;
+        left: - #{$nodeSize / 2};
+        top: 50%;
+        transform: translate3d(0, -50%, 0)
+    }
+
+    &.ne {
+        cursor: ne-resize;
+        top: - #{$nodeSize / 2};
+        right: - #{$nodeSize / 2};
+        // transform: translate3d(-50%, -50%, 0)
+    }
+    
+    &.se {
+        cursor: se-resize;
+        right: - #{$nodeSize / 2};
+        bottom: - #{$nodeSize / 2};
+        // transform: translate3d(0, -50%, 0)
+    }
+    
+    &.sw {
+        cursor: sw-resize;
+        bottom: - #{$nodeSize / 2};
+        left: - #{$nodeSize / 2};
+        // transform: translate3d(-50%, 0, 0)
+    }
+    
+    &.nw {
+        cursor: nw-resize;
+        left: - #{$nodeSize / 2};
+        top: - #{$nodeSize / 2};
+        // transform: translate3d(0, -50%, 0)
+    }
+}
+

@@ -1,16 +1,29 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const devMode = process.env.npm_lifecycle_event !== 'build'
+const path = require('path')
 
 module.exports = {
     entry: {
-      main: './src/index.jsx'
+      main: [/*'babel-polyfill', */'./src/index']
+    },
+    output: {
+      filename: "main.js",
+      path: path.resolve(__dirname, '/dist/'),
+      publicPath: '/dist/'
+    },
+    resolve: {
+      extensions: ['.js', '.jsx', '.css', '.scss', '.ts', '.tsx', '.json']
     },
     module: {
       rules: [
         {
+          test: /\.tsx?$/,
+          use: 'ts-loader'
+        },
+        {
           test: /\.jsx?$/,
-          exclude: /node_modules/,
+          exclude: [/node_modules/, /extracted/],
           use: {
             loader: "babel-loader"
           }
